@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# VSCode / IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+
+# Pytest
+.pytest_cache/
+*.cover
+coverage.xml
+htmlcov/
+
+# Logs
+*.log
+
+# Pygame / temp resources
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+
+# Tkinter / GUI temp files (jeśli jakieś powstaną)
+*.py~
+*.swp
+
+# JSON / temporary decks (jeśli generujesz)
+*.*
