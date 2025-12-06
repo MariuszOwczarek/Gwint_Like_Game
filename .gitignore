@@ -40,4 +40,4 @@ htmlcov/
 *.swp
 
 # JSON / temporary decks (jeśli generujesz)
-*.*
+*.json
