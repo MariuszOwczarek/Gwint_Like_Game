@@ -72,9 +72,16 @@ class GameController:
 
                 active_player = self.game.players[active_id]
 
-                self.renderer.render_game_state(self.game)
+                # CLI
+                #self.renderer.render_game_state(self.game)
+                #self.renderer.render_player_turn_header(active_player)
+                #self.renderer.render_player_hand(active_player)
+
+                #PYGAME
                 self.renderer.render_player_turn_header(active_player)
                 self.renderer.render_player_hand(active_player)
+                self.renderer.render_game_state(self.game)
+
 
                 action = self.input.choose_action(self.game, active_player)
 
