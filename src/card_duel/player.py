@@ -1,6 +1,5 @@
 from src.card_duel.deck import Deck
-from src.card_duel.card import Card, RowAffinity
-from src.card_duel.board import Board
+from src.card_duel.card import Card
 
 
 class Player:
@@ -20,15 +19,14 @@ class Player:
     def draw_starting_hand(self, hand_size: int) -> list[Card]:
         return self.draw_from_deck(hand_size)
 
-    def play_card(self,
-                  card: Card,
-                  board: Board,
-                  row_affinity: RowAffinity) -> None:
+    def play_card(self, card_index: int) -> Card:
+        try:
+            card = self.hand[card_index]
+        except IndexError:
+            raise ValueError("Invalid card index")
 
-        if card not in self.hand:
-            raise ValueError("Card not in hand")
         self.hand.remove(card)
-        board.place_card(self.id, card, row_affinity)
+        return card
 
     def hand_size(self) -> int:
         return len(self.hand)
@@ -39,15 +37,19 @@ class Player:
     def reset_for_new_round(self) -> None:
         self.has_passed = False
 
+    def reset_for_new_match(self) -> None:
+        self.has_passed = False
+        self.rounds_won = 0
+
     def increment_rounds_won(self) -> None:
         self.rounds_won += 1
 
     def serialize(self) -> dict:
         player_dict = {
-                    "id": self.id,
-                    "deck": self.deck.name,
-                    "hand": [card.serialize() for card in self.hand],
-                    "rounds_won": self.rounds_won,
-                    "has_passed": self.has_passed
-                    }
+                      "id": self.id,
+                      "deck": self.deck.name,
+                      "hand": [card.serialize() for card in self.hand],
+                      "rounds_won": self.rounds_won,
+                      "has_passed": self.has_passed
+                      }
         return player_dict

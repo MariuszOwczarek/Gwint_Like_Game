@@ -49,3 +49,6 @@ class Rules:
         if len(qualified) == 1:
             return qualified[0].id
         return None
+
+    def serialize(self) -> dict:
+        return {"rounds_to_win": self.rounds_to_win}

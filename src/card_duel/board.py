@@ -45,3 +45,21 @@ class Board:
         for player_id in self.rows_by_player:
             for row in self.rows_by_player[player_id].values():
                 row.clear()
+
+    def serialize(self) -> dict:
+        rows_serialized: dict[int, dict[str, list[dict]]] = {}
+
+        for player_id, rows_by_affinity in self.rows_by_player.items():
+            player_rows: dict[str, list[dict]] = {}
+
+            for affinity, row in rows_by_affinity.items():
+                player_rows[affinity.name] = [
+                    card.serialize() for card in row.cards
+                ]
+
+            rows_serialized[player_id] = player_rows
+
+        return {
+            "player_ids": list(self.player_ids),
+            "rows": rows_serialized,
+        }
